@@ -27,7 +27,7 @@ def update_boids(boids):
 	# Fly away from nearby boids
 	for i in range(len(xs)):
 		for j in range(len(xs)):
-			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < 10: # by turning the magic number 100 into 10, the regression test fails.
+			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < 100:
 				xvs[i]=xvs[i]+(xs[i]-xs[j])
 				yvs[i]=yvs[i]+(ys[i]-ys[j])
 	# Try to match speed with nearby boids
