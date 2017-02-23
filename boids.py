@@ -66,7 +66,7 @@ class Boids(object):
     # Fly away from nearby boids
     def fly_away(self):
         for i in self.all_the_boids:
-            for j in range(self.boid_number):
+            for j in self.all_the_boids:
                 if (self.x_positions[j]-self.x_positions[i])**2 + (self.y_positions[j]-self.y_positions[i])**2 < self.alert_distance:
                     self.x_velocities[i]+=(self.x_positions[i]-self.x_positions[j])
                     self.y_velocities[i]+=(self.y_positions[i]-self.y_positions[j])
@@ -74,7 +74,7 @@ class Boids(object):
     # Try to match speed with nearby boids
     def match_speed(self):
             for i in self.all_the_boids:
-                for j in range(self.boid_number):
+                for j in self.all_the_boids:
                     if (self.x_positions[j]-self.x_positions[i])**2 + (self.y_positions[j]-self.y_positions[i])**2 < self.formation_flying_distance:
                         self.x_velocities[i]+=(self.x_velocities[j]-self.x_velocities[i])*self.formation_flying_strength/self.boid_number
                         self.y_velocities[i]+=(self.y_velocities[j]-self.y_velocities[i])*self.formation_flying_strength/self.boid_number
@@ -111,5 +111,5 @@ if __name__ == "__main__":
     flock = Boids(boid_number,move_to_middle_strength,alert_distance,formation_flying_distance,formation_flying_strength,
                  x_position_min,x_position_max,y_position_min,y_position_max,
                  x_velocity_min,x_velocity_max,y_velocity_min,y_velocity_max)
-    # give a visual representation
+    
     flock.visuals(x_axis_min,x_axis_max,y_axis_min,y_axis_max,animation_frames,animation_interval)
