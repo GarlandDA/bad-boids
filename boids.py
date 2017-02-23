@@ -8,7 +8,8 @@ from matplotlib import animation
 import random
 
 # Deliberately terrible code for teaching purposes
-# 1st refactoring step: replacing magic numbers with constants
+# 2nd refactoring step: giving variables more self-explanatory names
+# The names xs,ys,xvs,yvs are terrible, but they will be dealt with in a different way, in later steps
 
 boid_number = 50
 
@@ -35,11 +36,11 @@ y_axis_max = 1500
 animation_frames = 50
 animation_interval = 50
 
-boids_x=[random.uniform(x_position_min,x_position_max) for x in range(boid_number)]
-boids_y=[random.uniform(y_position_min,y_position_max) for x in range(boid_number)]
-boid_x_velocities=[random.uniform(x_velocity_min,x_velocity_max) for x in range(boid_number)]
-boid_y_velocities=[random.uniform(y_velocity_min,y_velocity_max) for x in range(boid_number)]
-boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
+x_positions=[random.uniform(x_position_min,x_position_max) for x in range(boid_number)]
+y_positions=[random.uniform(y_position_min,y_position_max) for x in range(boid_number)]
+x_velocities=[random.uniform(x_velocity_min,x_velocity_max) for x in range(boid_number)]
+y_velocities=[random.uniform(y_velocity_min,y_velocity_max) for x in range(boid_number)]
+boids=(x_positions,y_positions,x_velocities,y_velocities)
 
 def update_boids(boids):
 	xs,ys,xvs,yvs=boids
