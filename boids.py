@@ -9,13 +9,13 @@ import random
 import numpy as np
 
 # Deliberately terrible code for teaching purposes
-# Replace constants by configuration file. This might be the most elegant way of doing it. I'll come back to this if I have time.
+# Replace repeated long expression 'range(self.boid_number)' by local variable 'self.all_the_boids'
 
 import yaml
-config=yaml.load(open("config.yaml")) 
+config=yaml.load(open("config.yaml")) # load configuration file
 
-
-#parameters for the boids
+# read configuration file constants
+# parameters for the boids
 boid_number = config["boid_number"]
 
 x_position_min = config["x_position_min"]
@@ -55,16 +55,17 @@ class Boids(object):
         self.x_velocities = [random.uniform(x_velocity_min,x_velocity_max) for boid_index in range(boid_number)]
         self.y_velocities = [random.uniform(y_velocity_min,y_velocity_max) for boid_index in range(boid_number)]
         self.boids = (self.x_positions,self.y_positions,self.x_velocities,self.y_velocities) # to be used in adapted regression test
+        self.all_the_boids = range(self.boid_number)
     
     def fly_to_middle(self):
-            for i in range(self.boid_number):
+            for i in self.all_the_boids:
                 for j in range(self.boid_number):
                     self.x_velocities[i]+=(self.x_positions[j]-self.x_positions[i])*self.move_to_middle_strength/self.boid_number
                     self.y_velocities[i]+=(self.y_positions[j]-self.y_positions[i])*self.move_to_middle_strength/self.boid_number
             
     # Fly away from nearby boids
     def fly_away(self):
-        for i in range(self.boid_number):
+        for i in self.all_the_boids:
             for j in range(self.boid_number):
                 if (self.x_positions[j]-self.x_positions[i])**2 + (self.y_positions[j]-self.y_positions[i])**2 < self.alert_distance:
                     self.x_velocities[i]+=(self.x_positions[i]-self.x_positions[j])
@@ -72,14 +73,14 @@ class Boids(object):
 
     # Try to match speed with nearby boids
     def match_speed(self):
-            for i in range(self.boid_number):
+            for i in self.all_the_boids:
                 for j in range(self.boid_number):
                     if (self.x_positions[j]-self.x_positions[i])**2 + (self.y_positions[j]-self.y_positions[i])**2 < self.formation_flying_distance:
                         self.x_velocities[i]+=(self.x_velocities[j]-self.x_velocities[i])*self.formation_flying_strength/self.boid_number
                         self.y_velocities[i]+=(self.y_velocities[j]-self.y_velocities[i])*self.formation_flying_strength/self.boid_number
     # Move according to velocities
     def move(self):
-        for i in range(self.boid_number):
+        for i in self.all_the_boids:
             self.x_positions[i]+=self.x_velocities[i]
             self.y_positions[i]+=self.y_velocities[i]
     
@@ -106,8 +107,9 @@ class Boids(object):
         plt.show()
 
 if __name__ == "__main__":
+    # create an instance of the Boids class
     flock = Boids(boid_number,move_to_middle_strength,alert_distance,formation_flying_distance,formation_flying_strength,
                  x_position_min,x_position_max,y_position_min,y_position_max,
                  x_velocity_min,x_velocity_max,y_velocity_min,y_velocity_max)
-    
+    # give a visual representation
     flock.visuals(x_axis_min,x_axis_max,y_axis_min,y_axis_max,animation_frames,animation_interval)
