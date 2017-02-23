@@ -8,7 +8,7 @@ from matplotlib import animation
 import random
 
 # Deliberately terrible code for teaching purposes
-# 3rd refactoring step: merging neighbouring loops with the same 'for' statement
+# A bit of tidying up
 
 boid_number = 50
 
@@ -35,10 +35,10 @@ y_axis_max = 1500
 animation_frames = 50
 animation_interval = 50
 
-x_positions=[random.uniform(x_position_min,x_position_max) for x in range(boid_number)]
-y_positions=[random.uniform(y_position_min,y_position_max) for x in range(boid_number)]
-x_velocities=[random.uniform(x_velocity_min,x_velocity_max) for x in range(boid_number)]
-y_velocities=[random.uniform(y_velocity_min,y_velocity_max) for x in range(boid_number)]
+x_positions=[random.uniform(x_position_min,x_position_max) for boid_index in range(boid_number)]
+y_positions=[random.uniform(y_position_min,y_position_max) for boid_index in range(boid_number)]
+x_velocities=[random.uniform(x_velocity_min,x_velocity_max) for boid_index in range(boid_number)]
+y_velocities=[random.uniform(y_velocity_min,y_velocity_max) for boid_index in range(boid_number)]
 boids=(x_positions,y_positions,x_velocities,y_velocities)
 
 def update_boids(boids):
@@ -46,24 +46,24 @@ def update_boids(boids):
 	# Fly towards the middle
 	for i in range(len(xs)):
 		for j in range(len(xs)):
-			xvs[i]=xvs[i]+(xs[j]-xs[i])*move_to_middle_strength/len(xs)
-			yvs[i]=yvs[i]+(ys[j]-ys[i])*move_to_middle_strength/len(xs)
+			xvs[i]+=(xs[j]-xs[i])*move_to_middle_strength/len(xs)
+			yvs[i]+=(ys[j]-ys[i])*move_to_middle_strength/len(xs)
 	# Fly away from nearby boids
 	for i in range(len(xs)):
 		for j in range(len(xs)):
 			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < alert_distance:
-				xvs[i]=xvs[i]+(xs[i]-xs[j])
-				yvs[i]=yvs[i]+(ys[i]-ys[j])
+				xvs[i]+=(xs[i]-xs[j])
+				yvs[i]+=(ys[i]-ys[j])
 	# Try to match speed with nearby boids
 	for i in range(len(xs)):
 		for j in range(len(xs)):
 			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < formation_flying_distance:
-				xvs[i]=xvs[i]+(xvs[j]-xvs[i])*formation_flying_strength/len(xs)
-				yvs[i]=yvs[i]+(yvs[j]-yvs[i])*formation_flying_strength/len(xs)
+				xvs[i]+=(xvs[j]-xvs[i])*formation_flying_strength/len(xs)
+				yvs[i]+=(yvs[j]-yvs[i])*formation_flying_strength/len(xs)
 	# Move according to velocities
 	for i in range(len(xs)):
-		xs[i]=xs[i]+xvs[i]
-		ys[i]=ys[i]+yvs[i]
+		xs[i]+=xvs[i]
+		ys[i]+=yvs[i]
 
 
 figure=plt.figure()
