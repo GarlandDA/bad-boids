@@ -8,8 +8,7 @@ from matplotlib import animation
 import random
 
 # Deliberately terrible code for teaching purposes
-# 2nd refactoring step: giving variables more self-explanatory names
-# The names xs,ys,xvs,yvs are terrible, but they will be dealt with in a different way, in later steps
+# 3rd refactoring step: merging neighbouring loops with the same 'for' statement
 
 boid_number = 50
 
@@ -48,8 +47,6 @@ def update_boids(boids):
 	for i in range(len(xs)):
 		for j in range(len(xs)):
 			xvs[i]=xvs[i]+(xs[j]-xs[i])*move_to_middle_strength/len(xs)
-	for i in range(len(xs)):
-		for j in range(len(xs)):
 			yvs[i]=yvs[i]+(ys[j]-ys[i])*move_to_middle_strength/len(xs)
 	# Fly away from nearby boids
 	for i in range(len(xs)):
