@@ -71,11 +71,3 @@ class Boids(object):
                                        frames=animation_frames, interval=animation_interval)
         anim
         plt.show()
-
-if __name__ == "__main__":
-    # create an instance of the Boids class
-    flock = Boids(boid_number,move_to_middle_strength,alert_distance,formation_flying_distance,formation_flying_strength,
-                 x_position_min,x_position_max,y_position_min,y_position_max,
-                 x_velocity_min,x_velocity_max,y_velocity_min,y_velocity_max)
-    
-    flock.visuals(x_axis_min,x_axis_max,y_axis_min,y_axis_max,animation_frames,animation_interval)

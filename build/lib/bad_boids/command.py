@@ -1,7 +1,9 @@
 import yaml
 from .boids import Boids # Note python 3 relative import
 
+
 config=yaml.load(open("config.yaml")) # load configuration file
+
 
 # read configuration file constants
 # parameters for the boids

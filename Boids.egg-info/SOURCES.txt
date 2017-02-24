@@ -1,4 +1,4 @@
-setup_boids.py
+setup.py
 Boids.egg-info/PKG-INFO
 Boids.egg-info/SOURCES.txt
 Boids.egg-info/dependency_links.txt
