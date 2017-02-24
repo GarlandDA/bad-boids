@@ -1,11 +1,12 @@
 import yaml
 from .boids import Boids # Note python 3 relative import
-from os.path import dirname, abspath, join
+#from os.path import dirname, abspath, join
 
-boids_dir = dirname(abspath(__file__))
+#boids_dir = dirname(abspath(__file__))
 
-config=yaml.load(open(join(boids_dir, "config.yaml"))) # load configuration file
+#config=yaml.load(open(join(boids_dir, "config.yaml"))) # load configuration file
 
+config=yaml.load(open("config.yaml")) # load configuration file
 
 # read configuration file constants
 # parameters for the boids

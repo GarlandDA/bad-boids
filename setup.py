@@ -7,6 +7,6 @@ setup(
     packages = find_packages(exclude=['*test']),
 	scripts = ['scripts/boids'],
 	include_package_data=True,
-	package_data = {'bad_boids': ['config.yaml']},
+	package_data = {'boids': ['config.yaml']},
     install_requires = ['matplotlib', 'setuptools'] # for some reason, the installer didn't like me adding 'yaml' and 'random' in this list
 )

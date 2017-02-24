@@ -7,5 +7,4 @@ Boids.egg-info/top_level.txt
 bad_boids/__init__.py
 bad_boids/boids.py
 bad_boids/command.py
-bad_boids/config.yaml
 scripts/boids
