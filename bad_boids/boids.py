@@ -6,40 +6,6 @@ for use as an exercise on refactoring.
 from matplotlib import pyplot as plt
 from matplotlib import animation
 import random
-import numpy as np
-
-# Deliberately terrible code for teaching purposes
-# Replace repeated long expression 'range(self.boid_number)' by local variable 'self.all_the_boids'
-
-import yaml
-config=yaml.load(open("config.yaml")) # load configuration file
-
-# read configuration file constants
-# parameters for the boids
-boid_number = config["boid_number"]
-
-x_position_min = config["x_position_min"]
-x_position_max = config["x_position_max"]
-y_position_min = config["y_position_min"]
-y_position_max = config["y_position_max"]
-
-x_velocity_min = config["x_velocity_min"]
-x_velocity_max = config["x_velocity_max"]
-y_velocity_min = config["y_velocity_min"]
-y_velocity_max = config["x_velocity_max"]
-
-move_to_middle_strength = config["move_to_middle_strength"]
-alert_distance = config["alert_distance"]
-formation_flying_distance = config["formation_flying_distance"]
-formation_flying_strength = config["formation_flying_strength"]
-
-# parameters for the animation
-x_axis_min = config["x_axis_min"]
-x_axis_max = config["x_axis_max"]
-y_axis_min = config["y_axis_min"]
-y_axis_max = config["y_axis_max"]
-animation_frames = config["animation_frames"]
-animation_interval = config["animation_interval"]
 
 class Boids(object):
     def __init__(self,boid_number,move_to_middle_strength,alert_distance,formation_flying_distance,formation_flying_strength,
@@ -86,7 +52,7 @@ class Boids(object):
     
     def update_boids(self):
         # Calling the following methods will update the positions of the boids:
-        print('update')
+        
         self.fly_to_middle()
         self.fly_away()
         self.match_speed()
@@ -94,7 +60,7 @@ class Boids(object):
                 
     def animate(self,frame):
        self.update_boids()
-       self.scatter.set_offsets(self.x_positions)
+       self.scatter.set_offsets(list(zip(self.x_positions,self.y_positions)))
         
     def visuals(self,x_axis_min,x_axis_max,y_axis_min,y_axis_max,animation_frames,animation_interval):
         figure=plt.figure()
