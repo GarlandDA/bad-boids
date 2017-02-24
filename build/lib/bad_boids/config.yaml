@@ -1,0 +1,24 @@
+
+boid_number: 50
+
+x_position_min: -450.0
+x_position_max: 50.0
+y_position_min: 300.0
+y_position_max: 600.0
+
+x_velocity_min: 0
+x_velocity_max: 10.0
+y_velocity_min: -20.0
+y_velocity_max: 20.0
+
+move_to_middle_strength: 0.01
+alert_distance: 100
+formation_flying_distance: 10000
+formation_flying_strength: 0.125
+
+x_axis_min: -500
+x_axis_max: 1500
+y_axis_min: -500
+y_axis_max: 1500
+animation_frames: 50
+animation_interval: 50
