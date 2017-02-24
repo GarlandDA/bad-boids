@@ -34,8 +34,8 @@ class Boids(object):
         for i in self.all_the_boids:
             for j in self.all_the_boids:
                 if (self.x_positions[j]-self.x_positions[i])**2 + (self.y_positions[j]-self.y_positions[i])**2 < self.alert_distance:
-                    self.x_velocities[i]+=(self.x_positions[i]-self.x_positions[j])
-                    self.y_velocities[i]+=(self.y_positions[i]-self.y_positions[j])
+                    self.x_velocities[i]+=self.x_positions[i]-self.x_positions[j]
+                    self.y_velocities[i]+=self.y_positions[i]-self.y_positions[j]
 
     # Try to match speed with nearby boids
     def match_speed(self):
